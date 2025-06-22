@@ -1,0 +1,44 @@
+{#  templates/__alloc__table.html  #}
+<table class="table table-sm table-bordered text-center">
+  <thead class="table-light">
+    <tr>
+      <th style="width:4rem">Round</th>
+
+      <!-- Agent 0 -->
+      <th>Agent&nbsp;0&nbsp;bundle</th>
+      <th style="width:6rem">A<sub>0</sub>(own valuation)</th>
+      <th style="width:6rem">A<sub>0</sub>(other valuation)</th>
+      <th style="width:5rem">A₀&nbsp;EF?</th>
+
+      <!-- Agent 1 -->
+      <th>Agent&nbsp;1&nbsp;bundle</th>
+      <th style="width:6rem">A<sub>1</sub>(own valuation)</th>
+      <th style="width:6rem">A<sub>1</sub>(other valuation)</th>
+      <th style="width:5rem">A₁&nbsp;EF?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for idx in range(rounds|length) %}
+    <tr>
+      <td>{{ idx + 1 }}</td>
+
+      <!-- ── Agent 0 ───────────────────────────────────────── -->
+      <td>{{ rounds[idx][0]|list|sort }}</td>
+      <td>{{ vals[idx][0]['own'] }}</td>
+      <td>{{ vals[idx][0]['other'] }}</td>
+      <td>
+        {% if checks[idx][0] %}✅{% else %}❌{% endif %}
+      </td>
+
+      <!-- ── Agent 1 ───────────────────────────────────────── -->
+      <td>{{ rounds[idx][1]|list|sort }}</td>
+      <td>{{ vals[idx][1]['own'] }}</td>
+      <td>{{ vals[idx][1]['other'] }}</td>
+      <td>
+        {% if checks[idx][1] %}✅{% else %}❌{% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
